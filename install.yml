@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: yes
+  pre_tasks:
+    - name: Limit to Archlinux
+      fail:
+        msg: "{{ ansible_distribution }} is not supported with this tag."
+      when: (ansible_distribution != "Archlinux")
+
+- name: print out operating system
+  hosts: all
+  gather_facts: True
+  tasks:
+  - debug: var=ansible_distribution
