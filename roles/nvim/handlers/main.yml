@@ -1,3 +1,4 @@
 ---
 - name: trigger plug install
   shell: nvim +PlugInstall +qall
+  ignore_errors: true

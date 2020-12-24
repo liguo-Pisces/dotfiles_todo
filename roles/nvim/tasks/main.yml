@@ -16,8 +16,8 @@
 - name: copy local.vim file
   copy:
       src: local.vim
-      dest: ~/.config/nvim/
-      notify: trigger plug install
-      tags:
-          - nvim-upgrade
+      dest: ~/.config/nvim/local.vim
+  #notify: trigger plug install
+  tags:
+      - nvim-upgrade
 
