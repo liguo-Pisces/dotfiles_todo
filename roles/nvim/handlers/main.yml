@@ -1,0 +1,3 @@
+---
+- name: trigger plug install
+  shell: nvim +PlugInstall +qall

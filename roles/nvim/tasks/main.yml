@@ -1,0 +1,23 @@
+---
+- name: install neovim
+  pacman:
+      name: neovim
+
+- name: create neovim config dir
+  file:
+      path: ~/.config/nvim/
+      state: directory
+
+- name: setup configuration file
+  script: setup_vimrc.sh
+  args:
+      creates: /tmp/ansible-nvim-lock
+
+- name: copy local.vim file
+  copy:
+      src: local.vim
+      dest: ~/.config/nvim/
+      notify: trigger plug install
+      tags:
+          - nvim-upgrade
+
