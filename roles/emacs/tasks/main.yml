@@ -1,0 +1,16 @@
+---
+- name: install emacs
+  pacman:
+      name: emacs
+
+- name: create emacs config dir
+  file:
+      path: ~/.emacs.d/
+      state: directory
+
+- name: copy emacs config
+  copy:
+      src: .
+      dest: ~/.emacs.d/
+  tags:
+      - emacs-upgrade
