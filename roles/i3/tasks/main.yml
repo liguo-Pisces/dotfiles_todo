@@ -1,0 +1,17 @@
+---
+- name: install i3-gaps
+  pacman:
+      name: i3-gaps
+
+- name: create i3 config dir
+  file:
+      path: ~/.config/i3/
+      state: directory
+
+- name: copy i3 config file
+  copy:
+      src: i3/config
+      dest: ~/.config/i3/config
+  tags:
+      - i3-upgrade
+

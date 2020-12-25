@@ -1,0 +1,290 @@
+# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+#: Super Key {{{
+
+	# super key
+	set $mod Mod4
+
+#: }}}
+
+#: Starting Program {{{
+
+	exec --no-startup-id picom -b
+	exec --no-startup-id xmodmap $HOME/.Xmodmap
+	exec --no-startup-id fcitx5
+	exec --no-startup-id nm-applet
+
+#: }}}
+
+#: Program Shortcuts {{{
+
+	# start a terminal
+	bindsym $mod+Return exec --no-startup-id alacritty
+
+	# start dmenu (a program launcher)
+	bindsym $mod+d exec --no-startup-id rofi -show drun -columns 2
+
+    # screenshot - scrot
+    bindsym --release Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/screenshot/'
+    bindsym --release Shift+Print exec --no-startup-id scrot -s -e 'mv $f ~/Pictures/screenshot/'
+
+	# bar toggle, hide or show
+	bindsym $mod+m bar mode toggle
+
+#: }}}
+
+#: Appearance {{{
+
+	# font
+	font pango:Hack 12
+
+	# window gaps
+	gaps inner 8
+	gaps outer 5
+	smart_gaps on
+
+	# new window
+	new_window none
+	new_float normal
+	hide_edge_borders both
+
+	# windows color
+	# class                 border  bground text    indicator child_border
+	client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+	client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+	client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+	client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+	client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+	client.background       #F8F8F2
+
+	# popups
+	for_window [window_role="pop-up"] floating enable
+	for_window [window_role="task_dialog"] floating enable
+
+	# float programs (find the programs'names in "/usr/share/applications")
+	for_window [class="gimp"] floating enable
+	for_window [class="virtualbox"] floating enable
+	for_window [class="vlc"] floating enable
+
+	# wallpaper	
+	exec_always --no-startup-id feh --bg-fill --randomize $HOME/Pictures/wallpaper/*
+
+	# bar
+	bar {
+		status_command i3blocks
+		position top
+		#mode hide
+		workspace_buttons yes
+		tray_padding 0
+		colors {
+			background #282A36
+			statusline #F8F8F2
+			separator  #44475A
+			focused_workspace  #44475A #44475A #F8F8F2
+			active_workspace   #282A36 #44475A #F8F8F2
+			inactive_workspace #282A36 #282A36 #BFBFBF
+			urgent_workspace   #FF5555 #FF5555 #F8F8F2
+			binding_mode       #FF5555 #FF5555 #F8F8F2
+		}
+	}
+
+	# monitor
+	# exec --no-startup-id xrandr --output eDP1 --primary
+	# exec --no-startup-id xrandr --output HDMI2 --auto --above eDP1
+
+#: }}}
+
+#: Workspace Control {{{
+
+	# putting clients on specific workspaces
+	#assign [class="emacs"] 2
+	#assign [class="chromium"] 3
+
+    # move workspace to output
+    #bindsym $mod+mod1+Left move workspace to output left
+    #bindsym $mod+mod1+Down move workspace to output below
+    #bindsym $mod+mod1+Up move workspace to output above
+    #bindsym $mod+mod1+Right move workspace to output right
+
+	# switch to near workspace
+	bindsym $mod+Tab workspace next
+	bindsym mod1+Tab workspace prev
+
+	# switch to workspace
+	bindsym $mod+1 workspace number 1
+	bindsym $mod+2 workspace number 2
+	bindsym $mod+3 workspace number 3
+	bindsym $mod+4 workspace number 4
+	bindsym $mod+5 workspace number 5
+	bindsym $mod+6 workspace number 6
+	bindsym $mod+7 workspace number 7
+	bindsym $mod+8 workspace number 8
+	bindsym $mod+9 workspace number 9
+	bindsym $mod+0 workspace number 0
+
+	# move focused container to workspace
+	bindsym $mod+Shift+1 move container to workspace number 1
+	bindsym $mod+Shift+2 move container to workspace number 2
+	bindsym $mod+Shift+3 move container to workspace number 3
+	bindsym $mod+Shift+4 move container to workspace number 4
+	bindsym $mod+Shift+5 move container to workspace number 5
+	bindsym $mod+Shift+6 move container to workspace number 6
+	bindsym $mod+Shift+7 move container to workspace number 7
+	bindsym $mod+Shift+8 move container to workspace number 8
+	bindsym $mod+Shift+9 move container to workspace number 9
+	bindsym $mod+Shift+0 move container to workspace number 0
+
+#: }}}
+
+#: Window Control {{{
+
+	# enter fullscreen mode for the focused container
+	bindsym $mod+f fullscreen toggle
+
+	# toggle tiling / floating
+	bindsym $mod+Shift+space floating toggle
+
+	# kill focused window (Mod1=Alt)
+	bindsym mod1+F4 kill
+
+	# hide | show window (minus is "-" and plus is "+")
+	bindsym $mod+minus move scratchpad
+	bindsym $mod+plus scratchpad show
+
+	# change container layout (stacked, tabbed, toggle split)
+	bindsym $mod+s layout stacking
+	bindsym $mod+t layout tabbed
+	bindsym $mod+c layout toggle split
+
+	#: window focus
+
+	# change focus between tiling / floating windows
+	bindsym $mod+space focus mode_toggle
+
+	# focus follows mouse (cursor)
+	focus_follows_mouse yes
+
+	# change focus
+	bindsym $mod+h focus left
+	bindsym $mod+j focus down
+	bindsym $mod+k focus up
+	bindsym $mod+l focus right
+
+	# alternatively, you can use the cursor keys:
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
+
+    # focus the parent container
+    #bindsym $mod+p focus parent
+
+    # focus the child container
+    #bindsym $mod+d focus child
+
+	#: move window
+
+	# Use Mouse+$mod to drag floating windows to their wanted position
+	floating_modifier $mod
+
+	# move focused window
+	bindsym $mod+Shift+h move left
+	bindsym $mod+Shift+j move down
+	bindsym $mod+Shift+k move up
+	bindsym $mod+Shift+l move right
+
+	# alternatively, you can use the cursor keys:
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right
+
+	#: split window
+
+	# split in horizontal orientation
+	bindsym $mod+mod1+h split h
+
+	# split in vertical orientation
+	bindsym $mod+mod1+v split v
+
+	# resize window (you can also use the mouse for that)
+	set $mode_resize resize
+	mode "$mode_resize" {
+			# These bindings trigger as soon as you enter the resize mode
+
+			# Pressing left will shrink the window’s width.
+			# Pressing right will grow the window’s width.
+			# Pressing up will shrink the window’s height.
+			# Pressing down will grow the window’s height.
+			bindsym j resize shrink width 10 px or 10 ppt
+			bindsym k resize grow height 10 px or 10 ppt
+			bindsym l resize shrink height 10 px or 10 ppt
+			bindsym semicolon resize grow width 10 px or 10 ppt
+
+			# same bindings, but for the arrow keys
+			bindsym Left resize shrink width 10 px or 10 ppt
+			bindsym Down resize grow height 10 px or 10 ppt
+			bindsym Up resize shrink height 10 px or 10 ppt
+			bindsym Right resize grow width 10 px or 10 ppt
+
+			# back to normal: Enter or Escape or $mod+r
+			bindsym Return mode "default"
+			bindsym Escape mode "default"
+			bindsym $mod+r mode "default"
+	}
+	bindsym $mod+r mode "$mode_resize"
+
+#: }}}
+
+#: Power Manager {{{
+
+	# power
+	set $mode_system select: Lock(L), Logout(E), Suspend(S), Hibernate(H), Reboot(R), Shutdown(Shift+S), Cancel(Esc)
+	mode "$mode_system" {
+		bindsym l exec --no-startup-id i3lock -c '#000000', mode "default"
+		bindsym e exec --no-startup-id i3-msg exit, mode "default"
+		bindsym s exec --no-startup-id systemctl suspend, mode "default"
+		bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+		bindsym r exec --no-startup-id systemctl reboot, mode "default"
+		bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+		bindsym Escape mode "default"
+	}
+	bindsym $mod+Pause mode "$mode_system"
+
+	# screen off | sleep | shutdown (time unit: seconds)
+	exec --no-startup-id xset dpms 300 1357
+	exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
+
+#: }}}
+
+#: Manage i3 {{{ 
+
+	# reload the configuration file
+	bindsym $mod+Shift+c reload
+
+	# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+	bindsym $mod+Shift+r restart
+
+	# lock screen
+	set $mode_lock i3lock: Return to Lock/Escape to Cancel
+	mode "$mode_lock" {
+		bindsym Return exec --no-startup-id i3lock -c '#000000', mode "default"
+		bindysm Escape mode "default"
+	}
+	bindsym Ctrl+mod1+l mode "$mode_lock"
+
+	# exit i3 (logs you out of your X session)
+	bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+#: }}}
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
