@@ -442,8 +442,8 @@ background_opacity: 0.9
 # And optionally:
 #
 # - `mods` (see key bindings)
-#mouse_bindings:
-#  - { mouse: Middle, action: PasteSelection }
+mouse_bindings:
+  - { mouse: Right, action: PasteSelection }
 
 # Key bindings
 #
