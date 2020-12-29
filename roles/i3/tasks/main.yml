@@ -10,7 +10,7 @@
 
 - name: copy i3 config file
   copy:
-      src: i3/config
+      src: config
       dest: ~/.config/i3/config
   tags:
       - i3-upgrade
