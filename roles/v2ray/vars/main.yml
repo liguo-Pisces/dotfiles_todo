@@ -1,0 +1,7 @@
+---
+inbounds_sock_port: 1080
+inbounds_http_port: 1081
+address: 127.0.0.1
+outbounds_vmess_port: xxxxx
+outbounds_vmess_users_id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+alterId: 64

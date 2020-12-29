@@ -1,0 +1,12 @@
+---
+- name: install v2ray
+  pacman:
+      name: v2ray
+  become: yes
+
+- name: copy v2ray config file
+  template:
+      src: config.json.j2
+      dest: /etc/v2ray/config.json
+  become: yes
+
