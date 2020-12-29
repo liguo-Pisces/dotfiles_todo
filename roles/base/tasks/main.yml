@@ -1,0 +1,46 @@
+---
+- name: install base software
+  block:
+      - name: install curl
+        pacman:
+            name: curl
+
+      - name: install wget
+        pacman:
+            name: wget
+
+  become: yes
+
+- name: install xinit
+  block:
+      - name: install xinit
+        pacman:
+            name: xorg-xinit
+
+      - name: copy .xinitrc file
+        copy:
+            src: xinitrc
+            dest: ~/.xinitrc
+
+  become: yes
+
+- name: isntall, configure fcitx5 and rime
+  block:
+      - name: install fcitx5
+        pacman:
+            name: fcitx5
+
+      - name: install fcitx5-im
+        pacman:
+            name: fcitx5-im
+
+      - name: install rime
+        pacman:
+            name: fcitx5-rime
+
+      - name: copy .pam_environment file
+        copy:
+            src: pam_environment
+            dest: ~/.pam_environment
+
+  become: yes
