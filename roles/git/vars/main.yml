@@ -1,0 +1,7 @@
+---
+user:
+    - name: xxx
+    - email: xxx@xxx.xxx
+
+pull:
+    - rebase: false

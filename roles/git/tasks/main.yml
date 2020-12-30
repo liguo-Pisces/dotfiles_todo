@@ -1,0 +1,10 @@
+---
+- name: install git
+  pacman:
+      name: git
+  become: yes
+
+- name: copy .gitconfig file
+  template:
+      src: gitconfig.j2
+      dest: ~/.gitconfig
