@@ -1,0 +1,166 @@
+# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+# Created by liguo for 5.8
+
+#: zinit {{{
+
+    ### Added by Zinit's installer
+    if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+        print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+        command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+        command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+            print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+            print -P "%F{160}▓▒░ The clone has failed.%f%b"
+    fi
+
+    source "$HOME/.zinit/bin/zinit.zsh"
+    autoload -Uz _zinit
+    (( ${+_comps} )) && _comps[zinit]=_zinit
+    ### End of Zinit's installer chunk
+
+#: }}}
+
+#: zsh plugins {{{
+
+    # completion
+    zinit snippet PZT::modules/completion/init.zsh
+
+    # autosuggestions
+    zinit ice pick'init.zsh' svn atclone'git clone https://github.com/zsh-users/zsh-autosuggestions.git external'
+    zinit snippet PZT::modules/autosuggestions
+
+    # theme
+    zinit light dracula/zsh
+
+    # color
+    zinit light ael-code/zsh-colored-man-pages
+    zinit light zdharma/fast-syntax-highlighting
+
+#: }}}
+
+#: alias {{{
+
+    # set $PATH
+    export PATH=$HOME/.local/bin:$PATH
+
+    # exa
+    alias ls="exa -F"
+
+    # neovim
+    alias vim="nvim"
+
+    # emacs
+    alias emacs="emacs -nw"
+
+    # bat
+    alias cat="bat"
+
+#: }}}
+
+#: go {{{
+
+    # install gvm
+    if [[ ! -f $HOME/.gvm/bin/gvm ]]; then
+        zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    fi
+
+    # gvm
+    [[ -s "/home/liguo/.gvm/scripts/gvm" ]] && source "/home/liguo/.gvm/scripts/gvm"
+
+    # golang
+    go env -w GO111MODULE=on
+    go env -w GOPROXY=https://goproxy.io,direct
+    #go env -w GOPRIVATE=*.corp.example.com
+
+#: }}}
+
+#: fzf {{{
+
+    # install fzf
+    if [[ ! -f $HOME/.fzf/install ]]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+    fi
+
+    # fzf
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
+    export FZF_COMPLETION_TRIGGER="~~"
+
+#: }}}
+
+#: history {{{
+
+    # history
+    HISTFILE=~/.zsh_history
+    HISTSIZE=10000
+    SAVEHIST=10000
+    setopt appendhistory
+
+#: }}}
+
+#: node {{{
+
+    # install nvm
+    if [[ ! -f $HOME/.nvm/nvm.sh ]]; then
+        git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.nvm
+    fi
+
+    # nvm
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#: }}}
+
+#: proxy {{{
+
+    # proxy -- proxychains-ng
+    alias pc="proxychains4"
+
+    # proxy -- environment variables
+    set_proxy () {
+        http_proxy=127.0.0.1:10809
+        https_proxy=127.0.0.1:10809
+        ftp_proxy=127.0.0.1:10809
+        no_proxy="127.0.0.1, localhost, 172.26.*, 172.25.6.66, 192.168.*"
+    }
+
+    # unset proxy
+    unset_proxy () {
+        unset http_proxy
+        unset https_proxy
+        unset ftp_proxy
+        unset no_proxy
+    }
+
+#: }}}
+
+#: python {{{
+
+    # install pyenv
+    if [[ ! -f $HOME/.pyenv/bin/pyenv ]]; then
+        git clone --depth 1 https://github.com/pyenv/pyenv.git ~/.pyenv
+    fi
+
+    # pyenv
+    export PATH="/home/liguo/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+
+#: }}}
+
+#: ssh {{{
+
+    # ssh-agent
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        ssh-agent -t 8h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    fi
+    if [[ ! "$SSH_AUTH_SOCK" ]]; then
+        source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+    fi
+
+#: }}}
+
+

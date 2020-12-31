@@ -8,7 +8,8 @@
       when: (ansible_distribution != "Archlinux")
 
   roles:
-      #- role: nvim
+      - role: zsh
+      - role: nvim
       - role: alacritty
       - role: emacs
       - role: i3

@@ -1,0 +1,14 @@
+---
+- name: install zsh
+  pacman:
+      name: zsh
+  become: yes
+
+- name: copy .zshrc file
+  copy:
+      src: zshrc
+      dest: ~/.zshrc
+  notify:
+      - upgrade zsh
+  tags:
+      - zsh-upgrade

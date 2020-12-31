@@ -6,7 +6,7 @@ call plug#begin("~/.vim/plugged")
 
 Plug 'Yggdroot/indentLine'
 
-Plug '/usr/bin/fzf'
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
