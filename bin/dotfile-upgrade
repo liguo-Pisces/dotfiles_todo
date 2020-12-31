@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+    echo "usage: dotfile-upgrade [role]"
+    exit 0
+fi
+
+roles=(
+i3
+zsh
+emacs
+nvim
+alacritty
+)
+
+for role in $@
+do
+    if [[ "${roles[@]}" =~ "${role}" ]]; then
+        ansible-playbook ~/.dotfiles/install.yml --tags ${role}-upgrade
+    fi
+done
+
+echo "Done:)"
+
+exit 0
