@@ -21,6 +21,10 @@
 
 #: zsh plugins {{{
 
+    # common
+    zinit snippet PZT::modules/helper/init.zsh
+    zinit snippet PZT::modules/utility/init.zsh
+
     # completion
     zinit snippet PZT::modules/completion/init.zsh
 
@@ -53,6 +57,9 @@
 
     # bat
     alias cat="bat"
+
+    # thefuck
+    eval "$(thefuck --alias)"
 
 #: }}}
 
