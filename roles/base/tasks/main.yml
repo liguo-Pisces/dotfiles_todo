@@ -9,6 +9,10 @@
         pacman:
             name: wget
 
+      - name: install exa
+        pacman:
+            name: exa
+
   become: yes
 
 - name: install xinit

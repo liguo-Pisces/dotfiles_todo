@@ -12,3 +12,8 @@
       - upgrade zsh
   tags:
       - zsh-upgrade
+
+- name: copy .npmrc file
+  copy:
+      src: npmrc
+      dest: ~/.npmrc
