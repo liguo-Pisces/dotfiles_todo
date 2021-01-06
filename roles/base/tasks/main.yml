@@ -13,6 +13,14 @@
         pacman:
             name: exa
 
+      - name: install htop
+        pacman:
+            name: htop
+
+      - name: install screen
+        pacman:
+            name: screen
+
   become: yes
 
 - name: install xinit
