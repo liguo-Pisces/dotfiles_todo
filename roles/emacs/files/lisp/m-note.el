@@ -1,10 +1,9 @@
-(set org-html-head-include-default-style nil
+(setq org-html-head-include-default-style nil
      org-html-head "")
 
 (require 'ox-publish)
 (setq org-publish-project-alist
-      '(
-        ("blog-pages"
+      '(("blog-pages"
          :base-directory "~/.blog/org/"
          :base-extension "org"
          :html-extension "html"
