@@ -13,6 +13,7 @@
   :init
   (setq super-save-auto-save-when-idle t)
   (setq auto-save-default nil)
+  (setq make-backup-files nil)
   :config
   (super-save-mode +1))
 
