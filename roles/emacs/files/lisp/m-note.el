@@ -12,6 +12,7 @@
          :auto-sitemap nil
          :section-numbers nil
          :table-of-contents t
+         :html-head "<link rel=\"stylesheet\" href=\"css/worg.css\" type=\"text/css\" />"
          :recursive t)
         ("blog-static"
          :base-directory "~/.blog/org/"
