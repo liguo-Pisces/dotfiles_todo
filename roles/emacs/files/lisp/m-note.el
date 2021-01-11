@@ -23,4 +23,6 @@
         ("blog" :components ("blog-pages" "blog-static"))
         ))
 
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
 (provide 'm-note)
