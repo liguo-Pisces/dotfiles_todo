@@ -21,6 +21,10 @@
         pacman:
             name: screen
 
+      - name: install openssh
+        pacman:
+            name: openssh
+
   become: yes
 
 - name: install xinit

@@ -1,4 +1,16 @@
 ---
+- name: install depend software
+  block:
+      - name: install feh
+        pacman:
+            name: feh
+
+      - name: install picom
+        pacman:
+            name: picom
+
+      become: yes
+
 - name: install i3-gaps
   pacman:
       name: i3-gaps
